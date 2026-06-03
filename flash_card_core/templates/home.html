@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Linking all documents -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Term Define/title>
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+    <link rel="icon" type="image/png" href = "images.png">
+</head>
+
+<!--GET THE TERM-->
+<label for="name">Term:</label>
+<input
+  type="text"
+  id="name"
+  name="name"
+  required
+  minlength="4"
+  maxlength="8"
+  size="10" />
+<!--GET THE DEFITION-->
+
+<form action="/">
+  <p><label for="define_term">Define the Term used</label></p>
+  <textarea id="define_term" name="define_term" rows="4" cols="50"></textarea>
+  <input type="submit" value="Submit">
+</form>
+</html>
+

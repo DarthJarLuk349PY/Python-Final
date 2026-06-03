@@ -1,17 +1,13 @@
 from flask import Flask, render_template
 app = Flask(__name__, template_folder='templates')
 
-@app.route('/')
+@app.route('/output')
 def home():
-    return "<h1>Hello World!<h1>"
+    return render_template('home.html')
 
-@app.route('/ask')
-def ask():
-    return render_template('index.html')
-
-@app.route('/flash')
-def flash():
-    return render_template('flash.html')
+@app.route('/output')
+def output():
+    return render_template('output.html')
 
 
 if __name__ == "__main__":
