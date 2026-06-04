@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
 <!--Linking all documents -->
 <head>
     <meta charset="UTF-8">
@@ -9,6 +11,15 @@
     <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
     <link rel="icon" type="image/png" href = "images.png">
 </head>
+<script src="func.py">
+  get_term()
+  get_defenition()
+  check_if_right()
+  combine(#)
+
+</script>
+
+
 
 <!--GET THE TERM-->
 <label for="name">Term:</label>
@@ -20,12 +31,13 @@
   minlength="4"
   maxlength="8"
   size="10" />
-<!--GET THE DEFITION-->
 
+
+<!--GET THE DEFITION-->
 <form action="/">
   <p><label for="define_term">Define the Term used</label></p>
   <textarea id="define_term" name="define_term" rows="4" cols="50"></textarea>
-  <input type="submit" value="Submit">
+  <input type="submit" value="submit">
 </form>
 </html>
 

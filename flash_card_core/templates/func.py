@@ -38,14 +38,7 @@ def combine(events):
           document.querySelector("#flashcard").innerHTML = "Errror"
           return 
      full_study = dict(zip(get_term_list,get_definition_list))
-     show_next_card()
-
-
-def show_next_card():
-     global current_index
-     if current_index:
-          pass
-
+     
 
 def check_if_right():
 #SOMTHING ALONG THE LINES OF THIS WERE USER ENTERS IF THEY QUESTIO IS RIGHT OT NOT
@@ -54,13 +47,8 @@ def check_if_right():
 
      if not full_study:
          document.querySelector("#feeedback").innerHTML = "please click comine to start "
-         return
-     user_answer = document.querySelctor("#user_answee_input").value.strip()
-     c_term = get_term_list[current_index]
-     c_defintion = full_study[current_term]
-     if current_index >= len(get_term_list):
-         document.querySelector("#flashcar_display").innerHTML = "Wrong"
-         current_index += 1
-         show_next_card()
-     else:
-         document.quesrySelceto("#feedback").innerHTML = "Incorrect, Try Agian" 
+         return 
+        user_answer = document.querySelctor("#user_answer_input").value.strip()
+        else:
+            document.quesrySelceto("#feedback").innerHTML = "Incorrect, Try Agian" 
+
