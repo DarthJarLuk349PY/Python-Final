@@ -33,27 +33,34 @@ def get_definition():
     print(get_definition_out)
 
 
-def combine():
-     #COMBINES THE PREVOUIS get_defintion and get_term for both to star studying.
-     pass
+def combine(events):
+     if len(get_term_list) != len(get_definition_list):
+          document.querySelector("#flashcard").innerHTML = "Errror"
+          return 
+     full_study = dict(zip(get_term_list,get+get_definition_list))
+     show_next_card()
 
 
+def show_next_card():
+     global current_index
+     if current_index 
 
 
 def check_if_right():
-    pass
 #SOMTHING ALONG THE LINES OF THIS WERE USER ENTERS IF THEY QUESTIO IS RIGHT OT NOT
 #THEN THE TAKES AS BOOL VARIABLE??? (IN PROGRESS)
-    """
-     get_definition_html = document.querySelector("#item_input")
-    user_definition = get_definition_html.value
-    if user_definition.strip().upper() != "":
-         get_definition_list.append(user_definition)
-         get_definition_html.value = ""
-    get_definition_out = "</ul>"
-    for x in get_definition_list:
-         get_definition_out += f"<li>{x}</li>"
-    get_definition_out += "</ul>"
-    document.querySelctor("#get_definition_out").inerHTML = get_definition_out
-    print(get_definition_out)
-    """
+    global current_index, full_study
+
+    if not full_study:
+         document.query Seclotor("#feeedback").innerHTML = "please click comine to start "
+         return
+    
+    user_answer = document.querySelctor("#user_answee_input").value.strip()
+    c_term = get_term_list[current_index]
+    c_defintion = full_study[current_term]
+    if current_index >= len(get_term_list):
+         document.querySelector("#flashcar_display").innerHTML = "Wrong"
+         current_index += 1
+         show_next_card()
+     else:
+         document.quesrySelceto("#feedback").innerHTML = "Incorrect, Try Agian" 
