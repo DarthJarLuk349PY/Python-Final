@@ -39,16 +39,3 @@ def combine(events):
           return 
      full_study = dict(zip(get_term_list,get_definition_list))
      
-
-def check_if_right():
-#SOMTHING ALONG THE LINES OF THIS WERE USER ENTERS IF THEY QUESTIO IS RIGHT OT NOT
-#THEN THE TAKES AS BOOL VARIABLE??? (IN PROGRESS)
-     global current_index, full_study
-
-     if not full_study:
-         document.querySelector("#feeedback").innerHTML = "please click comine to start "
-         return 
-        user_answer = document.querySelctor("#user_answer_input").value.strip()
-        else:
-            document.quesrySelceto("#feedback").innerHTML = "Incorrect, Try Agian" 
-
