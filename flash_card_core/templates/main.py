@@ -15,7 +15,7 @@ def get_term(x):
         for i in get_term_list :
             get_term_out += f"<li>{i}</li>"
         get_term_out += "</ul>"
-        document.querySelector("#get_term_out").inerHTML =  get_term_out
+        document.querySelector("#get_term_out").innerHTML =  get_term_out
         print(get_term_out)
 
 #GET THE DEFITION TERM
@@ -25,17 +25,17 @@ def get_definition():
     if user_definition.strip().upper() != "":
          get_definition_list.append(user_definition)
          get_definition_html.value = ""
-    get_definition_out = "</ul>"
+    get_definition_out = "<ul>"
     for x in get_definition_list:
          get_definition_out += f"<li>{x}</li>"
     get_definition_out += "</ul>"
-    document.querySelctor("#get_definition_out").inerHTML = get_definition_out
+    document.querySelector("#get_definition_out").innerHTML = get_definition_out
     print(get_definition_out)
-
 
 def combine(events):
      if len(get_term_list) != len(get_definition_list):
-          document.querySelector("#flashcard").innerHTML = "Errror"
+          document.querySelector("#flashcard").innerHTML = "Error"
           return 
      full_study = dict(zip(get_term_list,get_definition_list))
-     
+
+
