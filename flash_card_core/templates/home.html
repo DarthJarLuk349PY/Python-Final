@@ -1,59 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
-    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
-<!--Linking all documents -->
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Term Define</title>
-    <!-- ADD: Add CSS styling for form layout, inputs, buttons, and card display -->
+    
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
+    <py-config>
+        [[fetch]]
+        files = ["main.py"]
+    </py-config>
+
     <style>
-      body {
-        font-family: 'Times New Roman', Times, serif; background-color: red;margin: 2;
-        padding: 15px; display: flex; align-items: center;}
-      .contaniner{background-color: aliceblue;border-radius: 50px;width: 50%;}
-      h1 {color: #333; text-align: center;margin-bottom: 10px;}
-      .form-group{display: block;}
-      label{ display: block; margin-bottom: 5px; font-weight: 600; color: blue }
-      textarea {resize: vertical;}
-      button {width: 100%; padding-inline: 10px; background-color: #333; border: black; font-size: 
-        10px; cursor: pointer; 
-        font-weight: bold;}
-      button:hover {background-color: aqua;}
-      #sumbitBtn {background-color: chartreuse;}
-      .cards-list {margin-top: 25px; max-heigth: 300px; overflow: auto;}
-      .cards-entr{background-color: #f9f9f9; border: 5px solid #4caf50; padding: 12px; margin-bottom: 10px;
-      justify-content: space-between;}
-      .card-content {flex-grow: 1;padding-right: 10px; }
-      .car-entry strong{color: #333; display: block; margin-bottom: 3px;}
-      .delete-btn {
-        background-color: #f44336; color: white; border: none;  padding: 6px 10px; border-radius: 3px;
-        cursor: pointer; width: auto; margin-top: 0; font-size: 12px;
-      .delete-btn:hover{background-color: #da190b; }
-      }
+        body {font-family: 'Times New Roman', Times, serif;background-color: #f4f7f6; margin: 0;padding: 20px; justify-content: center;align-items: center;min-height: 100vh;}
+        .container {background-color: #ffffff;padding: 30px;border-radius: 10px;width: 100%;max-width: 500px;}
+        h1 {color: #333;text-align: center;margin-bottom: 24px;}
+        .form-group {margin-bottom: 15px;}
+        label {display: block;margin-bottom: 5px;font-weight: 600;color: #555;}
+        input[type="text"], textarea {width: 100%;padding: 10px;border: 1px solid #ccc;border-radius: 5px; box-sizing: border-box;font-size: 14px;}
+        textarea {resize: vertical;}
+        button {width: 100%;padding: 12px;background-color: #4CAF50;color: white;border: none;border-radius: 5px;font-size: 16px;cursor: pointer;font-weight: bold;margin-top: 10px;transition: background-color 0.2s;}
+        button:hover {background-color: #45a049;}
+        #submitBtn {background-color: #008CBA;margin-top: 20px;}
+        #submitBtn:hover {background-color: #007B9A;}
+        .cards-list {margin-top: 25px;max-height: 300px;overflow-y: auto;}
+        .card-entry {background-color: #f9f9f9;border-left: 5px solid #4CAF50;padding: 12px;margin-bottom: 10px;border-radius: 4px;display: flex;justify-content: space-between;align-items: center;}
+        .card-content {flex-grow: 1;padding-right: 10px;}
+        .card-entry strong {color: #333;display: block;margin-bottom: 3px;}
+        .card-entry p { margin: 0;color:green;font-size: 14px;}
+        .delete-btn {background-color: #f44336;color: white;border: none;padding: 6px 10px;border-radius: 3px;cursor: pointer;width: auto; margin-top: 0;font-size: 12px;}
+        .delete-btn:hover {background-color: #da190b; }
     </style>
-  </head>
-  <body>
-    <!-- FORMAT AND THE PHYCAIL MAKINBGS OF THE FLASHCARD USING HTML/CSS-->
-    <div class="contaniner">
-      <h1>Create Flashcards</h1>
-      <div class="form-group">
-        <label for="name">Term:</label>
-        <input type="text" id="name" name="name" required minlength="4" maxlength="8"
-        size="10" />
-      </div>
-      <div class="'form-group">
-        <p><label for="define_term">Define the Term used</label></p>
-        <textarea id="define_term" name="define_term" rows="4" cols="50"></textarea>
-        <input type="submit" value="submit">
-      </div>
-      <button type=""button" py="click"="main.addCard">add card</button>
-      <div id="cardlist" class="cards-list"></div>
-      <button id=""submitBtn type="button" py-click="main.sumbitCards"> Create Flashcards</button>
+</head>
+<body>
+    <div class="container">
+        <h1>Create Flashcards</h1>
+        <div class="form-group">
+            <label for="termInput">Term:</label>
+            <input type="text" id="termInput"name="termInput"placeholder="Enter term"required minlength="4" maxlength="8" />
+        </div>
+        <div class="form-group">
+            <label for="defInput">Define the Term used:</label>
+            <textarea id="defInput" name="defInput" rows="4" placeholder="Enter definition"></textarea>
+        </div>
+        <button type="button" py-click="main.addCard">Add Card</button>
+        <div id="cardsList" class="cards-list"></div>
+        <button id="submitBtn" type="button" py-click="main.submitCards">Create Flashcards</button>
     </div>
     <script type="py">
-    import main
+        import main
     </script>
-  </body>
-  </html>
+</body>
+</html>

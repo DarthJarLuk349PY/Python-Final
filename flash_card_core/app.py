@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_caching import Cache
-
 app = Flask(__name__, template_folder='templates')
 config = {
     "DEBUG": True,
@@ -9,18 +8,13 @@ config = {
 }
 app.config.from_mapping(config)
 cache = Cache(app)  
-
 study_data = {}
-
 @app.route('/')
 def home():
     return render_template('home.html')
-
 @app.route('/output')
 def output():
-    # FIX: Pass study_data to template to display flashcards
     return render_template('output.html', flashcards=study_data)
-
 @app.route('/api/save-study', methods=['POST'])
 def save_study():
     global study_data
@@ -31,6 +25,5 @@ def save_study():
         return jsonify({"status": "error", "message":"Mismatch/empty data"}), 400
     study_data = dict(zip(terms, definitions))  
     return jsonify({"status": "success"}), 200
-
 if __name__ == "__main__":
     app.run(host= '0.0.0.0', port=5500, debug=True)

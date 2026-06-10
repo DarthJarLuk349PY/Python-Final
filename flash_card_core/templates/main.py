@@ -1,41 +1,76 @@
 from pyscript import document
+import json
+import js
+from pyodide.ffi import create_proxy
+cards = []
+#GET THE STUDYING CARDS 
+def addCard(events):
+    terminput = document.querySelector("#termInput")
+    definput = document.querySelector("#defInput")
+    termval = terminput.value.strip()
+    defval = terminput.value.strip()
+    if not termval or not defval:
+        js.alert("fill out both terms and defintions!")
+        return
+    if len(termval) < 4 or len(termval) > 8:
+        js.alert("Term myse be between 4-8 chars long")
+        return
+    cards.append({
+        "term": termval,
+        "definition" : defval
+    })
+    terminput.value = ''
+    definput.value = ''
+def removeCard(index):
+    cards.pop(index)
+    renderCards()
+#CREATING TEH ACRDS 
+def renderCards():
+    cardslistdiv = document.querySelector("#cardist")
+    cardslistdiv.innerHTML = '' 
+    for index, card in enumerate(cards):
+        cardentry = js.document.createElement('div')
+        cardentry.calssNAem = 'card-entry'
+        contentdiv = js.document.createElement('div')
+        contentdiv.className = 'card-content'
+        contentdiv.innerHTML = f"<strong>{card['term']}</strong><p>{card['definition']}</p>"
+        deletebtn = js.document.createELement('button')
+        deletebtn.classNAme = 'delete-btn'
+        deletebtn = 'Delete'
+        def makedelcall(idx):
+            return lambda e: removeCard(idx)
+        deletebtn.addEventListener('click', create_proxy(makedelcall(index)))
+        cardentry.appendChild(contentdiv)
+        cardentry.appendChild(deletebtn)
+        cardslistdiv.appendChild(cardentry)
+def sumbit():
+    if len(cards) == 0:
+        js.alert('Add at leat one flashcard!')
+        return
+    payload = {'flashcards' : cards}
+    options = js.Object.fromEntries(create_proxy({
+        "method" : "POST",
+        "headers": js.Object.fromEntries(create_proxy({
+            "Contend-Type": "application/json" })),
+            "body": json.dumps(payload)
+        }))
+    def handle_response(response):
+        if response.ok:
+          js.window.location.href ='/output'
+        else:
+            js.alert('Failed to save flashcards. Please try again.')
 
-get_term_list = []
-get_definition_list = []
-full_study = {}
+    def handle_error(error):
+        print(f"Error: {error}")
+        js.alert('An error occurred while saving your flashcards.')
 
-#GET THE STUDYING TERM
-def get_term(x):
-        get_term_html = document.querySelector("#item_input")
-        user_term = get_term_html.value
-        if user_term.strip() != "":
-            get_term_list .append(user_term)
-            get_term_html.value = ""
-        get_term_out ="<ul>"
-        for i in get_term_list :
-            get_term_out += f"<li>{i}</li>"
-        get_term_out += "</ul>"
-        document.querySelector("#get_term_out").innerHTML =  get_term_out
-        print(get_term_out)
+    # Dispatched Fetch runtime request context execution
+    js.fetch('/api/save-study', options).then(
+        create_proxy(handle_response)
+    ).catch(
+        create_proxy(handle_error)
+    )
+            
+    
 
-#GET THE DEFITION TERM
-def get_definition():
-    get_definition_html = document.querySelector("#item_input")
-    user_definition = get_definition_html.value
-    if user_definition.strip().upper() != "":
-         get_definition_list.append(user_definition)
-         get_definition_html.value = ""
-    get_definition_out = "<ul>"
-    for x in get_definition_list:
-         get_definition_out += f"<li>{x}</li>"
-    get_definition_out += "</ul>"
-    document.querySelector("#get_definition_out").innerHTML = get_definition_out
-    print(get_definition_out)
-
-def combine(events):
-     if len(get_term_list) != len(get_definition_list):
-          document.querySelector("#flashcard").innerHTML = "Error"
-          return 
-     full_study = dict(zip(get_term_list,get_definition_list))
-
-
+   
