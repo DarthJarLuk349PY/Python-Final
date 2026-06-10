@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!--HEADER-->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +8,12 @@
     
     <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
     <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
-
+<!--PYTHON ENABKLED-->
     <py-config>
         [[fetch]]
         files = ["main.py"]
     </py-config>
-
+<!--FORMANTING-->
     <style>
         body {font-family: 'Times New Roman', Times, serif;background-color: #f4f7f6; margin: 0;padding: 20px; justify-content: center;align-items: center;min-height: 100vh;}
         .container {background-color: #ffffff;padding: 30px;border-radius: 10px;width: 100%;max-width: 500px;}
@@ -35,7 +35,7 @@
         .delete-btn:hover {background-color: #da190b; }
     </style>
 </head>
-<body>
+<body><!--INPUTS-->
     <div class="container">
         <h1>Create Flashcards</h1>
         <div class="form-group">
@@ -49,7 +49,7 @@
         <button type="button" py-click="main.addCard">Add Card</button>
         <div id="cardsList" class="cards-list"></div>
         <button id="submitBtn" type="button" py-click="main.submitCards">Create Flashcards</button>
-    </div>
+    </div> <!--PYTHON ENABLES/CONENCTION-->
     <script type="py">
         import main
     </script>
