@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 from flask_caching import Cache
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, template_folder='templates')#STARTS FLASK AND TEMPLETES 
 config = {
     "DEBUG": True,
     "CACH_TYPE": "SimpleCache",  
@@ -9,11 +9,11 @@ config = {
 app.config.from_mapping(config)
 cache = Cache(app)  
 study_data = {}
-@app.route('/')
+@app.route('/')#ROUTE AND REDICER / POST INAG UPDATING
 def home():
     return render_template('home.html')
 @app.route('/api/save-study', methods=['POST'])
-def save_study():
+def save_study():#KEEPING FOR CAHE AND TRYING TO SAVE DATA IF USE LEAVES OR NOT
     global study_data
     data = request.get_json()
     terms = data.get('terms', [])
