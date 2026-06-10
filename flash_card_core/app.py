@@ -12,9 +12,6 @@ study_data = {}
 @app.route('/')
 def home():
     return render_template('home.html')
-@app.route('/output')
-def output():
-    return render_template('output.html', flashcards=study_data)
 @app.route('/api/save-study', methods=['POST'])
 def save_study():
     global study_data

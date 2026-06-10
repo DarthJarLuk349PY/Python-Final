@@ -8,7 +8,7 @@ def addCard(events):
     terminput = document.querySelector("#termInput")
     definput = document.querySelector("#defInput")
     termval = terminput.value.strip()
-    defval = terminput.value.strip()
+    defval = definput.value.strip()
     if not termval or not defval:
         js.alert("fill out both terms and defintions!")
         return
@@ -21,44 +21,45 @@ def addCard(events):
     })
     terminput.value = ''
     definput.value = ''
+    renderCards()
 def removeCard(index):
     cards.pop(index)
     renderCards()
 #CREATING TEH ACRDS 
 def renderCards():
-    cardslistdiv = document.querySelector("#cardist")
+    cardslistdiv = document.querySelector("#cardsList")
     cardslistdiv.innerHTML = '' 
     for index, card in enumerate(cards):
         cardentry = js.document.createElement('div')
-        cardentry.calssNAem = 'card-entry'
+        cardentry.className = 'card-entry'
         contentdiv = js.document.createElement('div')
         contentdiv.className = 'card-content'
         contentdiv.innerHTML = f"<strong>{card['term']}</strong><p>{card['definition']}</p>"
-        deletebtn = js.document.createELement('button')
-        deletebtn.classNAme = 'delete-btn'
-        deletebtn = 'Delete'
+        deletebtn = js.document.createElement('button')
+        deletebtn.className = 'delete-btn'
+        deletebtn.textContent = 'Delete'
         def makedelcall(idx):
             return lambda e: removeCard(idx)
         deletebtn.addEventListener('click', create_proxy(makedelcall(index)))
         cardentry.appendChild(contentdiv)
         cardentry.appendChild(deletebtn)
         cardslistdiv.appendChild(cardentry)
-def sumbit():
+def submitCards(events):
     if len(cards) == 0:
-        js.alert('Add at leat one flashcard!')
+        js.alert('Add at least one flashcard!')
         return
-    payload = {'flashcards' : cards}
-    options = js.Object.fromEntries(create_proxy({
-        "method" : "POST",
-        "headers": js.Object.fromEntries(create_proxy({
-            "Contend-Type": "application/json" })),
-            "body": json.dumps(payload)
-        }))
+    payload = {'terms': [card['term'] for card in cards], 'definitions': [card['definition'] for card in cards]}
+    options = create_proxy({
+        "method": "POST",
+        "headers": {"Content-Type": "application/json"},
+        "body": json.dumps(payload)
+    })
     def handle_response(response):
-        if response.ok:
-          js.window.location.href ='/output'
+        if response.status == 200:
+            js.alert('Flashcards saved successfully!')
         else:
-            js.alert('Failed to save flashcards. Please try again.')
+            print(f"Response status: {response.status}")
+            js.alert(f'Failed to save flashcards. Status: {response.status}')
 
     def handle_error(error):
         print(f"Error: {error}")
